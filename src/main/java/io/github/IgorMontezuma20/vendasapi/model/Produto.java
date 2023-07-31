@@ -3,31 +3,55 @@ package io.github.IgorMontezuma20.vendasapi.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "produto")
 public class Produto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "nome", length = 100)
     private String nome;
+
     @Column(name = "descricao", length = 255)
     private String descricao;
+
     @Column(name = "preco", precision = 16, scale = 2)
     private BigDecimal preco;
-    @Column(name = "sku")
+
+    @Column
     private String sku;
+
+    @Column(name = "data_cadastro")
+    private LocalDate dataCadastro;
 
     public Produto() {
         super();
     }
 
     public Produto(String nome, String descricao, BigDecimal preco, String sku) {
+        super();
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.sku = sku;
+    }
+
+    public Produto(Long id, String nome, String descricao, BigDecimal preco, String sku) {
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.sku = sku;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        setDataCadastro(LocalDate.now());
     }
 
     public Long getId() {
@@ -70,15 +94,18 @@ public class Produto {
         this.sku = sku;
     }
 
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
 
     @Override
     public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", preco=" + preco +
-                ", sku='" + sku + '\'' +
-                '}';
+        return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", preco=" + preco + ", sku=" + sku
+                + "]";
     }
+
 }

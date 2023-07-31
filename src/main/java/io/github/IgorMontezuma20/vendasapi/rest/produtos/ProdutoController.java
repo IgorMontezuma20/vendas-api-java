@@ -3,13 +3,11 @@ package io.github.IgorMontezuma20.vendasapi.rest.produtos;
 import io.github.IgorMontezuma20.vendasapi.model.Produto;
 import io.github.IgorMontezuma20.vendasapi.model.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/produtos")
+@CrossOrigin("*")
 public class ProdutoController {
 
     @Autowired
@@ -18,14 +16,8 @@ public class ProdutoController {
     @PostMapping
     public ProdutoFormRequest salvar( @RequestBody ProdutoFormRequest produto ){
 
-        Produto produtoEntity = new Produto(
-                produto.getNome(),
-                produto.getDescricao(),
-                produto.getPreco(),
-                produto.getSku());
-
+        Produto produtoEntity = produto.toModel();
         repository.save(produtoEntity);
-        System.out.println(produtoEntity);
-        return produto;
+        return ProdutoFormRequest.fromModel(produtoEntity);
     }
 }
