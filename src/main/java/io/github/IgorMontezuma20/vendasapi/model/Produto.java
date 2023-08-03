@@ -1,7 +1,8 @@
 package io.github.IgorMontezuma20.vendasapi.model;
 
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Table(name = "produto")
 public class Produto {
 
+    //
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
