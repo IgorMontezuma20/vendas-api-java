@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -39,5 +41,34 @@ public class ClienteController {
         cliente.setId(id);
         repository.save(cliente);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ClienteFormRequest> getById(@PathVariable Long id){
+
+        return repository.findById(id)
+                .map( ClienteFormRequest::fromModel)
+                .map(clienteFr -> ResponseEntity.ok(clienteFr))
+                .orElseGet(() -> ResponseEntity.notFound().build() );
+    }
+
+    @DeleteMapping ("{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id){
+
+        return repository.findById(id)
+                .map( cliente -> {
+                    repository.delete(cliente);
+                    return ResponseEntity.noContent().build();
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build() );
+    }
+
+    @GetMapping
+    public List<ClienteFormRequest> getLista(){
+        return repository
+                .findAll()
+                .stream()
+                .map(ClienteFormRequest::fromModel)
+                .collect(Collectors.toList());
     }
 }
