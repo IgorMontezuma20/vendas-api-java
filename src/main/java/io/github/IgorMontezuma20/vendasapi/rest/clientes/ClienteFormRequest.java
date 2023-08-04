@@ -1,5 +1,6 @@
 package io.github.IgorMontezuma20.vendasapi.rest.clientes;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.github.IgorMontezuma20.vendasapi.model.Cliente;
 
 import java.time.LocalDate;
@@ -9,10 +10,12 @@ public class ClienteFormRequest {
     private Long id;
     private String nome;
     private String cpf;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     private String endereco;
     private String email;
     private String telefone;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate cadastro;
 
     public ClienteFormRequest() {
