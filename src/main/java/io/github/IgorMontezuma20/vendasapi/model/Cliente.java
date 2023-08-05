@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name= "cliente")
+@Table(name = "cliente")
 public class Cliente {
 
     @Id
@@ -14,33 +14,37 @@ public class Cliente {
     private String cpf;
     private String nome;
     private String endereco;
-    private String email;
     private String telefone;
+    private String email;
+
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro;
 
-    public Cliente(){
+    public Cliente() {
         super();
     }
 
-    public Cliente(Long id, LocalDate nascimento, String cpf, String nome, String endereco, String email, String telefone, LocalDate dataCadastro) {
+    public Cliente(Long id, LocalDate nascimento, String cpf, String nome, String endereco, String telefone,
+                   String email, LocalDate dataCadastro) {
+        super();
         this.id = id;
         this.nascimento = nascimento;
         this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
-        this.email = email;
         this.telefone = telefone;
+        this.email = email;
         this.dataCadastro = dataCadastro;
     }
 
-    public Cliente(LocalDate nascimento, String cpf, String nome, String endereco, String email, String telefone) {
+    public Cliente(LocalDate nascimento, String cpf, String nome, String endereco, String telefone, String email) {
+        super();
         this.nascimento = nascimento;
         this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
-        this.email = email;
         this.telefone = telefone;
+        this.email = email;
     }
 
     public Long getId() {
@@ -83,20 +87,20 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getTelefone() {
         return telefone;
     }
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public LocalDate getDataCadastro() {
@@ -109,15 +113,10 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
-                "id=" + id +
-                ", nascimento=" + nascimento +
-                ", cpf='" + cpf + '\'' +
-                ", nome='" + nome + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", email='" + email + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", dataCadastro=" + dataCadastro +
-                '}';
+        return "Cliente [id=" + id + ", nascimento=" + nascimento + ", cpf=" + cpf + ", nome=" + nome + ", endereco="
+                + endereco + ", telefone=" + telefone + ", email=" + email + ", dataCadastro=" + dataCadastro + "]";
     }
+
+
+
 }

@@ -22,7 +22,6 @@ public class ClienteFormRequest {
         super();
     }
 
-    
     public ClienteFormRequest(Long id, String nome, String cpf, LocalDate dataNascimento, String endereco, String email,
                               String telefone, LocalDate cadastro) {
         super();
