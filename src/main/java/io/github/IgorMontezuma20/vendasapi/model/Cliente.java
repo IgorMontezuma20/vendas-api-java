@@ -1,7 +1,8 @@
 package io.github.IgorMontezuma20.vendasapi.model;
 
-import javax.persistence.*;
 import java.time.LocalDate;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cliente")
@@ -37,6 +38,7 @@ public class Cliente {
         this.dataCadastro = dataCadastro;
     }
 
+
     public Cliente(LocalDate nascimento, String cpf, String nome, String endereco, String telefone, String email) {
         super();
         this.nascimento = nascimento;
@@ -45,6 +47,11 @@ public class Cliente {
         this.endereco = endereco;
         this.telefone = telefone;
         this.email = email;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        setDataCadastro(LocalDate.now());
     }
 
     public Long getId() {
