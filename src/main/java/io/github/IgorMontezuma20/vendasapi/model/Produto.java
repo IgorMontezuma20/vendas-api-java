@@ -27,7 +27,8 @@ public class Produto {
     @Column
     private String sku;
 
-    @Column(name = "data_cadastro")
+    @Column(name = "data_cadastro", updatable = false, insertable = true)
+
     private LocalDate dataCadastro;
 
     public Produto() {

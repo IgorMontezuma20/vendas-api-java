@@ -18,7 +18,7 @@ public class Cliente {
     private String telefone;
     private String email;
 
-    @Column(name = "data_cadastro")
+    @Column(name = "data_cadastro",  updatable = false, insertable = true)
     private LocalDate dataCadastro;
 
     public Cliente() {
