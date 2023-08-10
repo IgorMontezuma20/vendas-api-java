@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "item_venda")
-public class SaleItem {
+public class ItemVenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,7 +12,8 @@ public class SaleItem {
 
     @ManyToOne
     @JoinColumn(name = "id_venda")
-    private Sale venda;
+    private Venda venda;
+
     @ManyToOne
     @JoinColumn(name = "id_produto")
     private Produto produto;
@@ -20,47 +21,33 @@ public class SaleItem {
     @Column
     private Integer quantidade;
 
-
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Sale getVenda() {
+    public Venda getVenda() {
         return venda;
     }
-
-    public void setVenda(Sale sale) {
-        this.venda = sale;
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
-
     public Produto getProduto() {
         return produto;
     }
-
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-
     public Integer getQuantidade() {
         return quantidade;
     }
-
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
-
     @Override
     public String toString() {
-        return "SaleItem{" +
-                "id=" + id +
-                ", sale=" + venda +
-                ", produto=" + produto +
-                ", quantidade=" + quantidade +
-                '}';
+        return "ItemVenda [id=" + id + ", venda=" + venda + ", produto=" + produto + ", quantidade=" + quantidade + "]";
     }
+
 }

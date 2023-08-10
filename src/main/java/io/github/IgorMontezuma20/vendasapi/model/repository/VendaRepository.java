@@ -1,7 +1,7 @@
 package io.github.IgorMontezuma20.vendasapi.model.repository;
 
-import io.github.IgorMontezuma20.vendasapi.model.Sale;
+import io.github.IgorMontezuma20.vendasapi.model.Venda;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SaleRepository extends JpaRepository<Sale, Long> {
+public interface VendaRepository extends JpaRepository<Venda, Long> {
 }

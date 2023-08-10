@@ -1,5 +1,5 @@
 package io.github.IgorMontezuma20.vendasapi.model;
 
-public enum PaymentMethod {
+public enum FormaPagamento {
     DINHEIRO, CARTAO
 }

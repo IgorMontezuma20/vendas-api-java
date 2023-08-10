@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "venda")
-public class Sale {
+public class Venda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +18,10 @@ public class Sale {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento")
-    private PaymentMethod paymentMethod;
+    private FormaPagamento formaPagamento;
 
     @OneToMany(mappedBy = "venda")
-    private List<SaleItem> itens;
+    private List<ItemVenda> itens;
 
     @Column
     private BigDecimal total;
@@ -42,19 +42,19 @@ public class Sale {
         this.cliente = cliente;
     }
 
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
-    public List<SaleItem> getItens() {
+    public List<ItemVenda> getItens() {
         return itens;
     }
 
-    public void setItens(List<SaleItem> itens) {
+    public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
     }
 
@@ -68,12 +68,10 @@ public class Sale {
 
     @Override
     public String toString() {
-        return "Sale{" +
-                "id=" + id +
-                ", cliente=" + cliente +
-                ", paymentMethod=" + paymentMethod +
-                ", itens=" + itens +
-                ", total=" + total +
-                '}';
+        return "Venda [id=" + id + ", cliente=" + cliente + ", formaPagamento=" + formaPagamento + ", itens=" + itens
+                + ", total=" + total + "]";
     }
+
+
 }
+
