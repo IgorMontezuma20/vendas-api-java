@@ -10,13 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -40,8 +34,12 @@ public class VendasController {
     }
 
     @GetMapping("/relatorio-vendas")
-    public ResponseEntity<byte[]> relatorioVendas(){
-        var relatorioGerado = relatorioVendasService.gerarRelatorio();
+    public ResponseEntity<byte[]> relatorioVendas(
+            @RequestParam(value = "id", required = false, defaultValue = "0") Long id,
+            @RequestParam(value = "inicio", required = false, defaultValue = "") String inicio,
+            @RequestParam(value = "fim", required = false, defaultValue = "") String fim
+    ){
+        var relatorioGerado = relatorioVendasService.gerarRelatorio(id, inicio, fim);
         var headers = new HttpHeaders();
         var fileName = "relatorio-vendas.pdf";
         headers.setContentDispositionFormData("inline; filename=\"" +fileName+ "\"", fileName);

@@ -33,7 +33,7 @@ public class RelatorioVendasService {
     @Autowired
     private DataSource dataSource;
 
-    public byte[] gerarRelatorio() {
+    public byte[] gerarRelatorio(Long idCliente, String dataInicio, String dataFim) {
         //try with resources
         try (
                 Connection connection = dataSource.getConnection();
