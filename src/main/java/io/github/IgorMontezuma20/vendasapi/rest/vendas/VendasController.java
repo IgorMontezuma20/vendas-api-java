@@ -4,13 +4,16 @@ import io.github.IgorMontezuma20.vendasapi.model.Venda;
 import io.github.IgorMontezuma20.vendasapi.model.repository.ItemVendaRepository;
 import io.github.IgorMontezuma20.vendasapi.model.repository.VendaRepository;
 import io.github.IgorMontezuma20.vendasapi.service.RelatorioVendasService;
+import io.github.IgorMontezuma20.vendasapi.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 
 @RestController
@@ -39,7 +42,12 @@ public class VendasController {
             @RequestParam(value = "inicio", required = false, defaultValue = "") String inicio,
             @RequestParam(value = "fim", required = false, defaultValue = "") String fim
     ){
-        var relatorioGerado = relatorioVendasService.gerarRelatorio(id, inicio, fim);
+
+        Date dataInicio = DateUtils.fromString(inicio);
+        Date dataFim = DateUtils.fromString(fim, true);
+
+
+        var relatorioGerado = relatorioVendasService.gerarRelatorio(id, dataInicio, dataFim);
         var headers = new HttpHeaders();
         var fileName = "relatorio-vendas.pdf";
         headers.setContentDispositionFormData("inline; filename=\"" +fileName+ "\"", fileName);

@@ -2,6 +2,7 @@ package io.github.IgorMontezuma20.vendasapi.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,22 @@ public class Venda {
 
     @Column
     private BigDecimal total;
+
+    @Column(name = "data_venda", updatable = false, insertable = true)
+    private LocalDateTime dataCadastro;
+
+    @PrePersist
+    public void prePersist(){
+        setDataCadastro(LocalDateTime.now());
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
 
     public Long getId() {
         return id;
