@@ -10,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -38,13 +37,21 @@ public class VendasController {
 
     @GetMapping("/relatorio-vendas")
     public ResponseEntity<byte[]> relatorioVendas(
-            @RequestParam(value = "id", required = false, defaultValue = "0") Long id,
+            @RequestParam(value = "id", required = false, defaultValue = "") Long id,
             @RequestParam(value = "inicio", required = false, defaultValue = "") String inicio,
             @RequestParam(value = "fim", required = false, defaultValue = "") String fim
     ){
 
         Date dataInicio = DateUtils.fromString(inicio);
         Date dataFim = DateUtils.fromString(fim, true);
+
+        if(dataInicio == null){
+            dataInicio = DateUtils.DATA_INICIO_PADRAO;
+        }
+
+        if(dataFim == null){
+           dataFim = DateUtils.hoje(true);
+        }
 
 
         var relatorioGerado = relatorioVendasService.gerarRelatorio(id, dataInicio, dataFim);

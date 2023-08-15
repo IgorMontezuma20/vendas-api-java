@@ -27,11 +27,10 @@ public class Venda {
     @Column
     private BigDecimal total;
 
-    @Column(name = "data_venda", updatable = false, insertable = true)
+    @Column(name = "data_venda")
     private LocalDateTime dataCadastro;
-
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         setDataCadastro(LocalDateTime.now());
     }
 
